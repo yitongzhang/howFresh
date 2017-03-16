@@ -51,9 +51,22 @@ for veg in veggieDreams:
 		veggieDict[tempName] = veggie(tempName,monthsList)
 		print veggieDict[tempName].name
 		print veggieDict[tempName].months
+	
 	except:
 		print "error, going to next."
 		continue
 
+
+# Make dictionary of objects json serializable
+# Replace %20, with -
+serialVegDict ={}
+
+for veg in veggieDict:
+	serialVegDict[veg] =veggieDict[veg].__dict__
+
+
 # Spit out Data here!
+with open('vegData.json', 'w') as fp:
+    json.dump(serialVegDict, fp)
+
 
