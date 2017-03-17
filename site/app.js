@@ -6,12 +6,15 @@ var CurrentMonth = new Date().getMonth()
 var CurrentDate = new Date().getDate()
 var CurrentYear = new Date().getFullYear()
 
-console.log(CurrentMonth)
-console.log(CurrentDate)
+// User input =================================
+
+
+
+
 
 // Utility functions ==========================
-function availableThisMonth(selectedMonth,availableMonths){
-  if ( availableMonths.includes(selectedMonth)) {
+function monthsIntersect(selectedMonths,availableMonths){
+  if ( availableMonths.includes(selectedMonths)) {
     return true
   }
   return false
@@ -28,51 +31,37 @@ function logMonthSelection(month){
 // Picture of veg
 class VegImage extends React.Component {
   render() {
-    const fallbackImg = "https://placeimg.com/300/300/animals"
+    const fallbackImg = "http://placehold.it/350x150"
     return <img src={"img/"+this.props.name+".png"} onError={(e)=>{e.target.src=fallbackImg}}/>;
   }
 }
 
-//TO DO: build condtional Veg component
+// Conditional veggie component
 class VegItem extends React.Component {
   render() {
-      let months = this.props.months;
-      let name = this.props.name;
-      let selectedMonth = this.props.selectedMonth
-
-      let vegStyle = {
-        Width: "30vw",
-        display:"inline-block",
-      }
-
-      if (veggieDict[name].months.includes(selectedMonth)) {
-        <div className ="VegItem" style={vegStyle} key={name.toString()}>
-          <VegImage name={name}/>
-          <div>Hello, I'm {name}</div>
-          <div>{months}</div>
+    if(this.props.months.includes(this.props.selectedMonth)){
+      return (
+        <div className="vegItem">
+          <VegImage name={this.props.name}/>
+          <h4>Hello, I'm {this.props.name}</h4>
+          <p>{this.props.months}</p>
         </div>
-      }
-
+      );
+    }
+    return null;
   }
 }
 
-// Veg List
+
+// TO DO: Make this read one veg item, then a bunch
+//Veg List
 class VeggiesList extends React.Component {
   render() {
     var vegStyle = {
-      Width: "30vw",
-      display:"inline-block",
     }
-
     const veggies = this.props.veggies;
     const vegItems = veggies.map((veggie) =>
-      // TO DO: Make this read from vegitem
-      // <vegItem name={veggieDict[veggie].name} months={veggieDict[veggie].months} selectedMonth={"March"} />
-      <div className ="VegItem" style={vegStyle} key={veggie.toString()}>
-        <VegImage name={veggie}/>
-        <div>Hello, I'm {veggieDict[veggie].name}</div>
-        <div>{veggieDict[veggie].months}</div>
-      </div>
+      <VegItem name={veggieDict[veggie].name} months={veggieDict[veggie].months} selectedMonth={months[CurrentMonth]} />
     );
     return (
       <div>{vegItems}</div>
@@ -107,7 +96,7 @@ function Header(){
   return(
     <header>  
       <h1>What's Fresh?</h1>
-      <h2>in Northern California</h2>
+      <h2>in {months[CurrentMonth]} in Northern California</h2>
       <MonthCheckList months={months}/>
       <hr/>
     </header>
@@ -121,6 +110,7 @@ function Body(){
       <hr/>
     </main>
   );
+  console.log("SAY WHAT?");
 }
 
 function Footer(){

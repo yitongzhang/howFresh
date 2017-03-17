@@ -1,3 +1,11 @@
+h4{
+	line-height: 1;
+	margin-bottom: 0;
+}
+
+.vegItem{
+	margin: 50px 0px;
+}
 
 header li{
 	display: inline;
