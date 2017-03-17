@@ -56,8 +56,6 @@ class VegItem extends React.Component {
   }
 }
 
-
-
 // Veg List
 class VeggiesList extends React.Component {
   render() {
@@ -69,12 +67,12 @@ class VeggiesList extends React.Component {
     const veggies = this.props.veggies;
     const vegItems = veggies.map((veggie) =>
       // TO DO: Make this read from vegitem
-      <vegItem name={} months={} selectedMonth={} />
-      // <div className ="VegItem" style={vegStyle} key={veggie.toString()}>
-        // <VegImage name={veggie}/>
-        // <div>Hello, I'm {veggieDict[veggie].name}</div>
-        // <div>{veggieDict[veggie].months}</div>
-      // </div>
+      // <vegItem name={veggieDict[veggie].name} months={veggieDict[veggie].months} selectedMonth={"March"} />
+      <div className ="VegItem" style={vegStyle} key={veggie.toString()}>
+        <VegImage name={veggie}/>
+        <div>Hello, I'm {veggieDict[veggie].name}</div>
+        <div>{veggieDict[veggie].months}</div>
+      </div>
     );
     return (
       <div>{vegItems}</div>
