@@ -1,10 +1,14 @@
 // Data =======================================
 var veggieDict = data
+var monthsConvert ={"January":0, "February":1, "March":2, "April":3, "Friday":4, "June":5, "July":6, "August":7, "September":8, "October":9, "November":10, "December":11}
 var months =["January", "February", "March", "April", "Friday", "June", "July", "August", "September", "October", "November", "December"]
 var seasonStart ={"Spring":"2015-03-21","Summer":"2015-06-21","Fall":"2015-09-21","Winter":"2015-12-21"}
 var CurrentMonth = new Date().getMonth()
 var CurrentDate = new Date().getDate()
 var CurrentYear = new Date().getFullYear()
+var selectedMonths=[]
+selectedMonths.push(CurrentMonth)
+console.log(selectedMonths)
 
 // User input =================================
 
@@ -13,16 +17,42 @@ var CurrentYear = new Date().getFullYear()
 
 
 // Utility functions ==========================
-function monthsIntersect(selectedMonths,availableMonths){
-  if ( availableMonths.includes(selectedMonths)) {
-    return true
+function arrayIntersect(vege, alle){
+  var test = alle.filter(function(n) {return vege.indexOf(n) !== -1})
+  if (test.length == 0) {
+    console.log("no intersect "+test)
+    return false
   }
-  return false
+  console.log("intersects are "+test)
+  return true
+   
 }
 
+function numberToAlpha(number,months){
+  return months[number]
+}
+
+function alphaToNumber(alpha,monthsConvert){
+  return monthsConvert[alpha]
+}
+
+
 // Event Handlers =============================
-function logMonthSelection(month){
+function logMonthSelection(month,monthArray){
   console.log("The month is"+month)
+  if (monthArray.includes(monthsConvert[month])) {
+    var index = monthArray.indexOf(monthsConvert[month])
+    
+    if (index > -1) {
+        monthArray.splice(index, 1);
+    }
+  }
+  else{
+     monthArray.push(monthsConvert[month])
+   }
+   
+  console.log("I have selected these months:"+monthArray)
+  ReactDOM.render( <App/> , document.getElementById('root'));
 }
 
 
@@ -39,7 +69,8 @@ class VegImage extends React.Component {
 // Conditional veggie component
 class VegItem extends React.Component {
   render() {
-    if(this.props.months.includes(this.props.selectedMonth)){
+    // use .map arrowfunction to rejig this alpha array into numbs
+    if(arrayIntersect(this.props.months,this.props.selectedMonth)){
       return (
         <div className="vegItem">
           <VegImage name={this.props.name}/>
@@ -61,7 +92,7 @@ class VeggiesList extends React.Component {
     }
     const veggies = this.props.veggies;
     const vegItems = veggies.map((veggie) =>
-      <VegItem name={veggieDict[veggie].name} months={veggieDict[veggie].months} selectedMonth={months[CurrentMonth]} />
+      <VegItem name={veggieDict[veggie].name} months={veggieDict[veggie].months} selectedMonth={selectedMonths} key={veggieDict[veggie].name}/>
     );
     return (
       <div>{vegItems}</div>
@@ -74,7 +105,7 @@ class MonthCheckList extends React.Component{
     const months = this.props.months;
     const checkItems = months.map((month) =>
         <li key={month.toString()}>
-          <label for={month} onClick={() => {logMonthSelection(month)}} >{month}</label>
+          <label for={month} onClick={() => {logMonthSelection(month,selectedMonths)}} >{month}</label>
           <input type="checkbox" name="month" id={month} value={month}/>
         </li>
     );
