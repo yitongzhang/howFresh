@@ -24,7 +24,7 @@ class MonthCheckList extends React.Component{
     this.setState(prevState => ({
       display: !prevState.clicked
     }));
-    console.log(this.state)
+    // console.log(this.state)
   }
   render(){
     const styles ={
@@ -52,30 +52,51 @@ class MonthCheckList extends React.Component{
 // Picture of veg
 class VegImage extends React.Component {
   render() {
-    const fallbackImg = "http://placehold.it/350x20"  
-    return <img src={fallbackImg}/>
-    // return <img src={"img/"+this.props.name+".png"} onError={(e)=>{e.target.src=fallbackImg}}/>;
+    // const fallbackImg = "http://placehold.it/346x400"  
+    const fallbackImg = "img/Beets.png"  
+    return <img src={"img/"+this.props.name+".png"} onError={(e)=>{e.target.src=fallbackImg}}/>;
   }
 }
 
 // Conditional veggie component
 class VegItem extends React.Component {
   render() {
-    console.log("=========================================")
-    console.log("Trying the following veg: "+this.props.name)
+    // console.log("=========================================")
+    // console.log("Trying the following veg: "+this.props.name)
     const vegMonths = this.props.months;
+    const lastMonth = vegMonths.length-1;
     const userSelectedMonths = this.props.selectedMonth;
     const convertDict = this.props.convertDict;
     // use .map arrowfunction to rejig this alpha vegMonths into numbs
     const vegMonthsInNumber = alphaToNumber(vegMonths,convertDict);
     if(arrayIntersect(vegMonthsInNumber,userSelectedMonths)){
-      return (
-        <div className="vegItem">
-          <VegImage name={this.props.name}/>
-          <h4>Hello, I'm {this.props.name}</h4>
-          <p>{this.props.months}</p>
-        </div>
-      );
+      // if  omni-seasonal
+      if (vegMonths[0]=="January" && vegMonths[lastMonth]=="December"){
+        return (
+          <div className="vegItem four columns">
+            <VegImage name={this.props.name}/>
+
+              <div className="vegInfo">
+                <h4>{this.props.name}</h4>
+                <h5>Available all year</h5>
+              </div>
+
+          </div>
+        );
+      }
+      else{
+        return (
+          <div className="vegItem four columns">
+            <VegImage name={this.props.name}/>
+
+              <div className="vegInfo">
+                <h4>{this.props.name}</h4>
+                <h5>{vegMonths[0]}–{vegMonths[lastMonth]}</h5>
+              </div>
+
+          </div>
+        );
+      }
     }
     return null;
   }
@@ -112,7 +133,6 @@ function Header(){
       <h1>What's Fresh?</h1>
       <h2>in {months[CurrentMonth]} in Northern California</h2>
       <MonthCheckList months={months}/>
-      <hr/>
     </header>
   )
 }
@@ -121,15 +141,14 @@ function Body(){
   return(
     <main>
       <VeggiesList veggies={Object.keys(veggieDict)}/>
-      <hr/>
     </main>
   );
-  console.log("SAY WHAT?");
+  // console.log("SAY WHAT?");
 }
 
 function Footer(){
   return(
-    <footer>
+    <footer className="twelve columns">
       <p>Made by <a href="http://omstudio.co/">O/M Studio</a></p>
       <p>Data from <a href="http://www.cuesa.org/">CUESA</a></p>
     </footer>
@@ -137,8 +156,8 @@ function Footer(){
 }
 
 function App(){
-  console.log("=========================================")
-  console.log("================REFRESH!!================")
+  // console.log("=========================================")
+  // console.log("================REFRESH!!================")
   return(
     <div>
       <Header/>
@@ -153,16 +172,16 @@ ReactDOM.render( <App/> , document.getElementById('root'));
 // ============================================
 // Utility functions ==========================
 function arrayIntersect(veg, all){
-  console.log("----")
-  console.log("veg months are "+veg)
-  console.log("selected months are "+all)
-  console.log("----")
+  // console.log("----")
+  // console.log("veg months are "+veg)
+  // console.log("selected months are "+all)
+  // console.log("----")
   var test = all.filter(function(n) {return veg.indexOf(n) !== -1})
   if (test.length == 0) {
-    console.log("There's no intersect. Don't display. "+test)
+    // console.log("There's no intersect. Don't display. "+test)
     return false
   }
-  console.log("Intersect of veg and selected months are: "+test)
+  // console.log("Intersect of veg and selected months are: "+test)
   return true
    
 }
@@ -177,13 +196,13 @@ function alphaToNumber(alphaList,monthsConvert){
     numberList.push(monthsConvert[alphaList[i]])
   }
   return numberList
-  console.log("convert output is: "+numberList)
-  console.log("convert output type is: "+ typeof(numberList))
+  // console.log("convert output is: "+numberList)
+  // console.log("convert output type is: "+ typeof(numberList))
 }
 
 // Event Handlers =============================
 function logMonthSelection(month,monthArray){
-  console.log("The month is"+month)
+  // console.log("The month is"+month)
   if (monthArray.includes(monthsConvert[month])) {
     var index = monthArray.indexOf(monthsConvert[month])
     
@@ -195,7 +214,7 @@ function logMonthSelection(month,monthArray){
      monthArray.push(monthsConvert[month])
    }
    
-  console.log("I have selected these months:"+monthArray)
+  // console.log("I have selected these months:"+monthArray)
   ReactDOM.render( <App/> , document.getElementById('root'));
 }
 

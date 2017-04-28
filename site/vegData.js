@@ -310,5 +310,9 @@ var data = {
 	"Lemongrass": {
 		"months": ["January", "July", "August", "September", "October", "November", "December"],
 		"name": "Lemongrass"
+	},
+	"Avocados": {
+		"months":["February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+		"name": "Avocados"
 	}
 }

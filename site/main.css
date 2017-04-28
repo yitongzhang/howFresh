@@ -1,12 +1,41 @@
+@font-face {
+  font-family: 'Souvenir-demi';
+  src: url('fonts/SouvenirStd-Demi.otf');
+}
+
+html{
+	background-color: #F8FFF6;
+}
+
 h4{
 	line-height: 1;
 	margin-bottom: 0;
 }
 
-.vegItem{
-	margin: 50px 0px;
-}
-
 header li{
 	display: inline;
+}
+
+.vegItem{
+	margin-bottom: 40px;
+	display: flex;
+	flex-direction: row;
+	background-color: #D9FFD8;
+	align-items: center;
+}
+
+.vegItem img{
+	margin-left: -10%;
+	margin-top: -10%;
+	order: 1;
+	width: 60%;
+	height: auto;
+}
+
+.vegItem .vegInfo{
+	order: 2;
+}
+
+
+main{
 }
