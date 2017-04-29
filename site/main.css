@@ -1,7 +1,13 @@
 @font-face {
-  font-family: 'Souvenir-demi';
-  src: url('fonts/SouvenirStd-Demi.otf');
+	font-family: 'Souvenir-demi';
+	src: url('fonts/SouvenirStd-Demi.otf');
 }
+@font-face {
+	font-family: 'Souvenir-medium';
+	src: url('fonts/SouvenirStd-Medium.otf');
+}
+
+
 
 html{
 	background-color: #F8FFF6;
@@ -12,21 +18,17 @@ h4{
 	margin-bottom: 0;
 }
 
-header li{
-	display: inline;
-}
-
 .vegItem{
 	margin-bottom: 40px;
 	display: flex;
 	flex-direction: row;
-	background-color: #D9FFD8;
+	background-color: #E8FCED;
 	align-items: center;
 }
 
 .vegItem img{
-	margin-left: -10%;
-	margin-top: -10%;
+	margin-left: -8%;
+	margin-top: -8%;
 	order: 1;
 	width: 60%;
 	height: auto;
@@ -34,8 +36,58 @@ header li{
 
 .vegItem .vegInfo{
 	order: 2;
+	padding-left: 20px;
+}
+
+header{
+	text-align: center;
+	margin: 50px 0;
+}
+
+header .titleArea{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 50px 0;
+}
+
+.smallTitle{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	font-family: "museo-slab";
+	font-weight: 700;
+}
+
+.line{
+	width: 50px;
+	height: 2px;
+	background-color: #027003;
+	display: inline-block;
+	margin: 0px 10px;
+}
+
+header ul{
+	display: flex;
+	justify-content: space-around;
+	padding: 0 30px;
+	margin: 0;
+}
+
+header li{
+	display: inline;
+	font-size: 2.1rem; 
+	line-height: 1.35; 
+	font-family: "Souvenir-medium";
+	opacity: 0.3;
+}
+
+header li:hover{
+	opacity: 1;
 }
 
 
-main{
+footer{
+	text-align: center;
 }
+

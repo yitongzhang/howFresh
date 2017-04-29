@@ -29,7 +29,7 @@ class MonthCheckList extends React.Component{
   render(){
     const styles ={
       normal:{
-        color:"red"
+        color:"#027003"
       },
       selected:{
         color:"blue"
@@ -40,7 +40,6 @@ class MonthCheckList extends React.Component{
     const checkItems = months.map((month) =>
         <li key={month.toString()}>
           <label style={styles.normal}for={month} onClick={() => {logMonthSelection(month,selectedMonths)}}> {month}</label>
-          <input type="checkbox" name="month" id={month} value={month}/>
         </li>
     );
     return (
@@ -130,9 +129,14 @@ function Header(){
   // TO DO: Display veggie count
   return(
     <header>  
-      <h1>What's Fresh?</h1>
-      <h2>in {months[CurrentMonth]} in Northern California</h2>
-      <MonthCheckList months={months}/>
+      <div className="titleArea">
+        <h1>How Fresh</h1>
+        <div className="smallTitle"><div className="line left"></div><h5>Are Vegetables In</h5><div className="line right"></div></div>
+        <h2>Northern California</h2>
+      </div>
+      <nav>
+        <MonthCheckList months={months}/>
+      </nav>
     </header>
   )
 }
@@ -149,8 +153,8 @@ function Body(){
 function Footer(){
   return(
     <footer className="twelve columns">
-      <p>Made by <a href="http://omstudio.co/">O/M Studio</a></p>
-      <p>Data from <a href="http://www.cuesa.org/">CUESA</a></p>
+      <div className="smallTitle"><div className="line left"></div><h5>About</h5><div className="line right"></div></div>
+      <p>Made by <a href="http://omstudio.co/">O/M Studio</a>, with data from <a href="http://www.cuesa.org/">CUESA</a></p>
     </footer>
   )
 }
