@@ -1,3 +1,4 @@
+
 // Data =======================================
 var veggieDict = data
 var monthsConvert ={"January":0, "February":1, "March":2, "April":3, "May":4, "June":5, "July":6, "August":7, "September":8, "October":9, "November":10, "December":11}
@@ -10,8 +11,6 @@ var CurrentYear = new Date(). getFullYear()
 // In number format
 var selectedMonths=[]
 selectedMonths.push(CurrentMonth)
-
-
 
 // Components =================================
 // Display months
@@ -51,6 +50,8 @@ class MonthCheckList extends React.Component{
     ReactDOM.render( <App/> , document.getElementById('root'));
   }
   render(){
+    const settings = {
+      dots: true
     console.log("====render month Checklist");
     console.log("====selected month is "+selectedMonths)
     const months = this.props.months;
@@ -60,7 +61,7 @@ class MonthCheckList extends React.Component{
         </li>
     );
     return (
-      <ul>{checkItems}</ul>
+      <ul className="container"><Slider>{checkItems}</Slider></ul>
     );
   }
 }

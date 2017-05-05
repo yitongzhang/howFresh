@@ -1,0 +1,16 @@
+{
+  "name": "how-fresh",
+  "version": "1.0.0",
+  "description": "A OM Studio side-project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-slick": "^0.14.11"
+  }
+}
