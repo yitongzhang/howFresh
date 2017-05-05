@@ -1,0 +1,19 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'v' ]
+2 info using npm@4.0.5
+3 info using node@v6.9.4
+4 verbose config Skipping project config: /Users/yitongzhang/.npmrc. (matches userconfig)
+5 verbose stack Error: Invalid package.json
+5 verbose stack     at /usr/local/lib/node_modules/npm/lib/view.js:84:30
+5 verbose stack     at ReadFileContext.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:90:21)
+5 verbose stack     at ReadFileContext.callback (/usr/local/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:78:16)
+5 verbose stack     at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:365:13)
+6 verbose cwd /Users/yitongzhang/Desktop/howFresh/site
+7 error Darwin 16.5.0
+8 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "v"
+9 error node v6.9.4
+10 error npm  v4.0.5
+11 error Invalid package.json
+12 error If you need help, you may report this error at:
+12 error     <https://github.com/npm/npm/issues>
+13 verbose exit [ 1, true ]

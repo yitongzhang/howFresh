@@ -1,6 +1,7 @@
 // Data =======================================
 var veggieDict = data
 var monthsConvert ={"January":0, "February":1, "March":2, "April":3, "May":4, "June":5, "July":6, "August":7, "September":8, "October":9, "November":10, "December":11}
+var reMonthsConvert ={0:"January", 1:"February", 2:"March", 3:"April", 4:"May", 5:"June", 6:"July", 7:"August", 8:"September", 9:"October", 10:"November", 11:"December"}
 var months =["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 var seasonStart ={"Spring":"2015-03-21","Summer":"2015-06-21","Fall":"2015-09-21","Winter":"2015-12-21"}
 var CurrentMonth = new Date().getMonth()
@@ -17,29 +18,45 @@ selectedMonths.push(CurrentMonth)
 class MonthCheckList extends React.Component{
   constructor(props) {
     super(props);
-    this.state ={clicked:false};
-      this.handleClick = this.handleClick.bind(this);
+    var CurrentMonth = props.CurrentMonth;
+    this.state = {isToggleOn: props.months.map(
+      function(currentValue, index){
+        if (index==CurrentMonth) {
+          return true;
+        }
+        return false;
+      }
+    )};
+
+    this.handleClick = this.handleClick.bind(this);
   }
-  handleClick() {
-    this.setState(prevState => ({
-      display: !prevState.clicked
-    }));
-    // console.log(this.state)
+  handleClick(num) {
+    this["num"]=num;
+    var selected = this.num;
+    selectedMonths=[];
+    selectedMonths.push(selected);
+    this.setState(function(prevState, props) {
+      return {
+        isToggleOn: prevState.isToggleOn.map(
+          function(currentValue, index, arr){
+            if (selected==index) {
+              console.log("swapped "+selected)
+              return true;
+            }
+            return false;
+          }
+        )
+      };
+    });
+    ReactDOM.render( <App/> , document.getElementById('root'));
   }
   render(){
-    const styles ={
-      normal:{
-        color:"#027003"
-      },
-      selected:{
-        color:"blue"
-      }
-    };
-
+    console.log("====render month Checklist");
+    console.log("====selected month is "+selectedMonths)
     const months = this.props.months;
-    const checkItems = months.map((month) =>
+    const checkItems = months.map((month, i) =>
         <li key={month.toString()}>
-          <label style={styles.normal}for={month} onClick={() => {logMonthSelection(month,selectedMonths)}}> {month}</label>
+          <button className={this.state.isToggleOn[i]} onClick={() => this.handleClick(i)}> {month}</button>
         </li>
     );
     return (
@@ -51,7 +68,6 @@ class MonthCheckList extends React.Component{
 // Picture of veg
 class VegImage extends React.Component {
   render() {
-    // const fallbackImg = "http://placehold.it/346x400"  
     const fallbackImg = "img/Beets.png"  
     return <img src={"img/"+this.props.name+".png"} onError={(e)=>{e.target.src=fallbackImg}}/>;
   }
@@ -60,8 +76,8 @@ class VegImage extends React.Component {
 // Conditional veggie component
 class VegItem extends React.Component {
   render() {
-    // console.log("=========================================")
-    // console.log("Trying the following veg: "+this.props.name)
+    console.log("------------------------------------")
+    console.log("Trying the following veg: "+this.props.name)
     const vegMonths = this.props.months;
     const lastMonth = vegMonths.length-1;
     const userSelectedMonths = this.props.selectedMonth;
@@ -127,6 +143,8 @@ class SeasonCheck extends React.Component{
 // Final assembly ============================
 function Header(){
   // TO DO: Display veggie count
+  console.log("====render header");
+
   return(
     <header>  
       <div className="titleArea">
@@ -135,7 +153,7 @@ function Header(){
         <h2>Northern California</h2>
       </div>
       <nav>
-        <MonthCheckList months={months}/>
+        <MonthCheckList months={months} CurrentMonth={CurrentMonth}/>
       </nav>
     </header>
   )
@@ -147,7 +165,6 @@ function Body(){
       <VeggiesList veggies={Object.keys(veggieDict)}/>
     </main>
   );
-  // console.log("SAY WHAT?");
 }
 
 function Footer(){
@@ -160,8 +177,7 @@ function Footer(){
 }
 
 function App(){
-  // console.log("=========================================")
-  // console.log("================REFRESH!!================")
+  console.log("================LOAD!!================")
   return(
     <div>
       <Header/>

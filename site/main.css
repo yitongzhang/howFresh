@@ -76,10 +76,26 @@ header ul{
 
 header li{
 	display: inline;
+
+}
+
+button{
 	font-size: 2.1rem; 
 	line-height: 1.35; 
 	font-family: "Souvenir-medium";
+	color: #027003;
+	background-color: #F8FFF6;
+	outline: none;
+	border:0px;
 	opacity: 0.3;
+	cursor: pointer;
+}
+button:hover{
+	opacity: 1;
+}
+
+.true{
+	opacity: 1;
 }
 
 header li:hover{
