@@ -50,8 +50,13 @@ class MonthCheckList extends React.Component{
     ReactDOM.render( <App/> , document.getElementById('root'));
   }
   render(){
-    const settings = {
-      dots: true
+    var settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
     console.log("====render month Checklist");
     console.log("====selected month is "+selectedMonths)
     const months = this.props.months;
@@ -61,7 +66,7 @@ class MonthCheckList extends React.Component{
         </li>
     );
     return (
-      <ul className="container"><Slider>{checkItems}</Slider></ul>
+      <ul className="container">{checkItems}</ul>
     );
   }
 }
@@ -77,8 +82,8 @@ class VegImage extends React.Component {
 // Conditional veggie component
 class VegItem extends React.Component {
   render() {
-    console.log("------------------------------------")
-    console.log("Trying the following veg: "+this.props.name)
+    // console.log("------------------------------------")
+    // console.log("Trying the following veg: "+this.props.name)
     const vegMonths = this.props.months;
     const lastMonth = vegMonths.length-1;
     const userSelectedMonths = this.props.selectedMonth;
