@@ -98,12 +98,20 @@ button:hover{
 	opacity: 1;
 }
 
+.slick-next:before, .slick-prev:before{color: green; opacity:1; font-size: 20px;}
+.slick-next{right:-30px;}
+.slick-prev{left:-30px;}
+
 header li:hover{
 	opacity: 1;
 }
-
 
 footer{
 	text-align: center;
 }
 
+@media (max-width: 720px) {
+	.titleArea{
+		margin-bottom: 10px !important;
+	}
+}

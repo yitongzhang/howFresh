@@ -1,4 +1,3 @@
-
 // Data =======================================
 var veggieDict = data
 var monthsConvert ={"January":0, "February":1, "March":2, "April":3, "May":4, "June":5, "July":6, "August":7, "September":8, "October":9, "November":10, "December":11}
@@ -18,14 +17,16 @@ class MonthCheckList extends React.Component{
   constructor(props) {
     super(props);
     var CurrentMonth = props.CurrentMonth;
-    this.state = {isToggleOn: props.months.map(
-      function(currentValue, index){
-        if (index==CurrentMonth) {
-          return true;
-        }
-        return false;
-      }
-    )};
+    this.state = {
+      isToggleOn: props.months.map(
+        function(currentValue, index){
+          if (index==CurrentMonth) {
+            return true;
+          }
+          return false;
+        }),
+      test:"string"
+    };
 
     this.handleClick = this.handleClick.bind(this);
   }
@@ -49,14 +50,8 @@ class MonthCheckList extends React.Component{
     });
     ReactDOM.render( <App/> , document.getElementById('root'));
   }
+
   render(){
-    var settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    };
     console.log("====render month Checklist");
     console.log("====selected month is "+selectedMonths)
     const months = this.props.months;
@@ -65,9 +60,35 @@ class MonthCheckList extends React.Component{
           <button className={this.state.isToggleOn[i]} onClick={() => this.handleClick(i)}> {month}</button>
         </li>
     );
-    return (
-      <ul className="container">{checkItems}</ul>
-    );
+    const winWidth = window.innerWidth;
+    const settings = {
+      infinite: true,
+      speed: 500,
+      slidesToShow: 3,
+      slidesToScroll: 3,
+      initialSlide: CurrentMonth,
+      arrows:true,
+      afterChange: function(currentIndex) {
+        console.log('currentIndex', currentIndex);
+        console.log('nextIndex', (currentIndex+1)%12);
+        console.log('prevIndex', (currentIndex+11)%12);
+        console.log(this)
+      }
+    };
+    if (winWidth>720) {
+      return (
+        <ul>{checkItems}</ul>
+      );
+    }
+    else {
+      return(
+        <div className="container">
+          <Slider {...settings}>
+            {checkItems}
+          </Slider>
+        </div>
+      );
+    }
   }
 }
 
@@ -150,19 +171,32 @@ class SeasonCheck extends React.Component{
 function Header(){
   // TO DO: Display veggie count
   console.log("====render header");
-
-  return(
-    <header>  
-      <div className="titleArea">
-        <h1>How Fresh</h1>
-        <div className="smallTitle"><div className="line left"></div><h5>Are Vegetables In</h5><div className="line right"></div></div>
-        <h2>Northern California</h2>
-      </div>
-      <nav>
-        <MonthCheckList months={months} CurrentMonth={CurrentMonth}/>
-      </nav>
-    </header>
-  )
+  const winWidth = window.innerWidth;
+  if (winWidth>720) { return(
+      <header>  
+        <div className="titleArea">
+          <h1>How Fresh</h1>
+          <div className="smallTitle"><div className="line left"></div><h5>Are Vegetables In</h5><div className="line right"></div></div>
+          <h2>Northern California</h2>
+        </div>
+        <nav>
+          <MonthCheckList months={months} CurrentMonth={CurrentMonth}/>
+        </nav>
+      </header>
+  )}
+  else{ return(
+      <header>  
+        <div className="titleArea">
+          <h1>How Fresh</h1>
+          <div className="smallTitle"><div className="line left"></div><h5>Are Vegetables In</h5><div className="line right"></div></div>
+          <h2>Northern Cali</h2>
+          <div className="smallTitle"><div className="line left"></div><h5>In the Month of</h5><div className="line right"></div></div>
+        </div>
+        <nav>
+          <MonthCheckList months={months} CurrentMonth={CurrentMonth}/>
+        </nav>
+      </header>
+  )}
 }
 
 function Body(){
