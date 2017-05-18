@@ -11,8 +11,12 @@ var CurrentYear = new Date(). getFullYear()
 var selectedMonths=[]
 selectedMonths.push(CurrentMonth)
 
+
 // Components =================================
-// Display months
+
+// Display months -------------
+// Used by: Header
+// Using: *
 class MonthCheckList extends React.Component{
   constructor(props) {
     super(props);
@@ -52,7 +56,6 @@ class MonthCheckList extends React.Component{
   }
 
   render(){
-    console.log("====render month Checklist");
     console.log("====selected month is "+selectedMonths)
     const months = this.props.months;
     const checkItems = months.map((month, i) =>
@@ -60,39 +63,55 @@ class MonthCheckList extends React.Component{
           <button className={this.state.isToggleOn[i]} onClick={() => this.handleClick(i)}> {month}</button>
         </li>
     );
+    const checkItemsSmall = months.map((month, i) =>
+        <li key={month.toString()}>
+          <button className={this.state.isToggleOn[i]} onClick={() => this.handleClick(i)}> {month.substring(0,3)}</button>
+        </li>
+    );
     const winWidth = window.innerWidth;
     const settings = {
       infinite: true,
       speed: 500,
+      centerMode:true,
       slidesToShow: 3,
-      slidesToScroll: 3,
+      slidesToScroll: 1,
       initialSlide: CurrentMonth,
-      arrows:true,
+      arrows:false,
       afterChange: function(currentIndex) {
         console.log('currentIndex', currentIndex);
         console.log('nextIndex', (currentIndex+1)%12);
         console.log('prevIndex', (currentIndex+11)%12);
-        console.log(this)
+        console.log(this);
+        slickNext();
       }
     };
-    if (winWidth>720) {
+    if (winWidth>1200) {
       return (
         <ul>{checkItems}</ul>
+      );
+    }
+    else if (winWidth>720) {
+      return (
+        <ul>{checkItemsSmall}</ul>
       );
     }
     else {
       return(
         <div className="container">
+          <div className="monthMask leftBox"></div>
           <Slider {...settings}>
-            {checkItems}
+            {checkItemsSmall}
           </Slider>
+          <div className="monthMask rightBox"></div>
         </div>
       );
     }
   }
 }
 
-// Picture of veg
+// Picture of veg -------------
+// Used by VegItem
+// Using: *
 class VegImage extends React.Component {
   render() {
     const fallbackImg = "img/Beets.png"  
@@ -100,19 +119,18 @@ class VegImage extends React.Component {
   }
 }
 
-// Conditional veggie component
+// Conditional veggie component ------------
+// Used by: VeggiesList
+// Using: VegImage
 class VegItem extends React.Component {
   render() {
-    // console.log("------------------------------------")
-    // console.log("Trying the following veg: "+this.props.name)
     const vegMonths = this.props.months;
     const lastMonth = vegMonths.length-1;
     const userSelectedMonths = this.props.selectedMonth;
     const convertDict = this.props.convertDict;
-    // use .map arrowfunction to rejig this alpha vegMonths into numbs
     const vegMonthsInNumber = alphaToNumber(vegMonths,convertDict);
     if(arrayIntersect(vegMonthsInNumber,userSelectedMonths)){
-      // if  omni-seasonal
+
       if (vegMonths[0]=="January" && vegMonths[lastMonth]=="December"){
         return (
           <div className="vegItem four columns">
@@ -145,7 +163,9 @@ class VegItem extends React.Component {
 }
 
 
-//Veg List
+// Makes a list of VegItems
+// Used by: Body
+// Using: VegItem
 class VeggiesList extends React.Component {
   render() {
     var vegStyle = {
@@ -160,26 +180,17 @@ class VeggiesList extends React.Component {
   }
 }
 
-class SeasonCheck extends React.Component{
-  render(){
-    // Insert season stuff later
-  }
-}
-
-
 // Final assembly ============================
 function Header(){
-  // TO DO: Display veggie count
-  console.log("====render header");
   const winWidth = window.innerWidth;
   if (winWidth>720) { return(
-      <header>  
+      <header id="header">  
         <div className="titleArea">
           <h1>How Fresh</h1>
           <div className="smallTitle"><div className="line left"></div><h5>Are Vegetables In</h5><div className="line right"></div></div>
           <h2>Northern California</h2>
         </div>
-        <nav>
+        <nav id="desktopMonthFilter">
           <MonthCheckList months={months} CurrentMonth={CurrentMonth}/>
         </nav>
       </header>
@@ -192,7 +203,7 @@ function Header(){
           <h2>Northern Cali</h2>
           <div className="smallTitle"><div className="line left"></div><h5>In the Month of</h5><div className="line right"></div></div>
         </div>
-        <nav>
+        <nav id="mobileMonthFilter">
           <MonthCheckList months={months} CurrentMonth={CurrentMonth}/>
         </nav>
       </header>
@@ -201,7 +212,7 @@ function Header(){
 
 function Body(){
   return(
-    <main>
+    <main id='main'>
       <VeggiesList veggies={Object.keys(veggieDict)}/>
     </main>
   );
@@ -217,7 +228,6 @@ function Footer(){
 }
 
 function App(){
-  console.log("================LOAD!!================")
   return(
     <div>
       <Header/>
@@ -227,21 +237,14 @@ function App(){
   )
 }
 
-ReactDOM.render( <App/> , document.getElementById('root'));
 
-// ============================================
 // Utility functions ==========================
+
 function arrayIntersect(veg, all){
-  // console.log("----")
-  // console.log("veg months are "+veg)
-  // console.log("selected months are "+all)
-  // console.log("----")
   var test = all.filter(function(n) {return veg.indexOf(n) !== -1})
   if (test.length == 0) {
-    // console.log("There's no intersect. Don't display. "+test)
     return false
   }
-  // console.log("Intersect of veg and selected months are: "+test)
   return true
    
 }
@@ -256,13 +259,10 @@ function alphaToNumber(alphaList,monthsConvert){
     numberList.push(monthsConvert[alphaList[i]])
   }
   return numberList
-  // console.log("convert output is: "+numberList)
-  // console.log("convert output type is: "+ typeof(numberList))
 }
 
 // Event Handlers =============================
 function logMonthSelection(month,monthArray){
-  // console.log("The month is"+month)
   if (monthArray.includes(monthsConvert[month])) {
     var index = monthArray.indexOf(monthsConvert[month])
     
@@ -273,14 +273,51 @@ function logMonthSelection(month,monthArray){
   else{
      monthArray.push(monthsConvert[month])
    }
-   
-  // console.log("I have selected these months:"+monthArray)
+
   ReactDOM.render( <App/> , document.getElementById('root'));
 }
 
 
+// Main ==========================
+ReactDOM.render( <App/> , document.getElementById('root'));
+window.onresize = function(event) {
+  setTimeout(function(){ ReactDOM.render( <App/> , document.getElementById('root')); }, 300);
+};
 
+window.onscroll = function() {
+  if (window.innerWidth < 720) {
+    stickMobileNav();
+  }
+  else {
+    stickDesktopNav();
+  }
+};
 
+function stickMobileNav (){
+  var mobileSticky = document.getElementById('mobileMonthFilter');
+  var stickyMain = document.getElementById('main');
+  if( document.body.scrollTop+document.documentElement.scrollTop > 184){
+    mobileSticky.className = "stuck";
+    stickyMain.className = "stuckMainMobile";
+  }
+  else{
+    mobileSticky.className = "";
+    stickyMain.className = "";
+  } 
+}
+
+function stickDesktopNav (){
+  var desktopSticky = document.getElementById('desktopMonthFilter');
+  var stickyMain = document.getElementById('main');
+  if( document.body.scrollTop+document.documentElement.scrollTop > 215){
+    desktopSticky.className = "stuck";
+    stickyMain.className = "stuckMainDesktop";
+  }
+  else {
+    desktopSticky.className = "";
+    stickyMain.className = "";
+  }
+}
 
 
 

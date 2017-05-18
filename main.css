@@ -22,7 +22,7 @@ h4{
 	margin-bottom: 40px;
 	display: flex;
 	flex-direction: row;
-	background-color: #E8FCED;
+	background-color: #EEFEEF;
 	align-items: center;
 }
 
@@ -69,8 +69,8 @@ header .titleArea{
 
 header ul{
 	display: flex;
-	justify-content: space-around;
-	padding: 0 30px;
+	justify-content: space-between;
+	padding: 0 0px;
 	margin: 0;
 }
 
@@ -110,8 +110,70 @@ footer{
 	text-align: center;
 }
 
+.container{
+	padding: 0 0px;
+}
+
+.stuck{
+	position: fixed;
+	top:0;
+	left: 0;
+	background-color: #F8FFF6;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
+	width: 100vw;
+	margin-left: 0;
+}
+.stuck ul{
+	max-width: 80%;
+	margin:0 auto;
+}
+
+.stuckMainDesktop{
+	margin-top: 132px;
+}
+
+.stuckMainMobile{
+	margin-top: 110px;
+}
+
+
+
+
 @media (max-width: 720px) {
-	.titleArea{
-		margin-bottom: 10px !important;
+	.columns, .column{
+		width: 90%;
+		margin-left: 5%;
 	}
+	.titleArea{
+		margin-bottom: 0px !important;
+	}
+	button{
+		font-size: 4.2rem;
+	}
+	.line{
+		width: 30px;
+	}
+	.monthMask{
+		z-index: 100;
+		width: 140px;
+		height: 4.8rem;
+		position: absolute;
+	}
+	.container .leftBox{
+		top: 0;
+		left: 0;
+		background: -webkit-linear-gradient(left, rgba(248, 255, 246, 1) , rgba(248, 255, 246, 0.1)); /* For Safari 5.1 to 6.0 */
+		background: -o-linear-gradient(right, rgba(248, 255, 246, 1) , rgba(248, 255, 246, 0.1)); /* For Opera 11.1 to 12.0 */
+		background: -moz-linear-gradient(right, rgba(248, 255, 246, 1) , rgba(248, 255, 246, 0.1)); /* For Firefox 3.6 to 15 */
+		background: linear-gradient(to right, rgba(248, 255, 246, 1) , rgba(248, 255, 246, 0.1)); /* Standard syntax */
+	}
+	.container .rightBox{
+		top: 0;
+		right: 0;
+		background: -webkit-linear-gradient(left, rgba(248, 255, 246, 1) , rgba(248, 255, 246, 0.1)); /* For Safari 5.1 to 6.0 */
+		background: -o-linear-gradient(left, rgba(248, 255, 246, 1) , rgba(248, 255, 246, 0.1)); /* For Opera 11.1 to 12.0 */
+		background: -moz-linear-gradient(left, rgba(248, 255, 246, 1) , rgba(248, 255, 246, 0.1)); /* For Firefox 3.6 to 15 */
+		background: linear-gradient(to left, rgba(248, 255, 246, 1) , rgba(248, 255, 246, 0.1)); /* Standard syntax */
+	}
+
 }
