@@ -7,8 +7,6 @@
 	src: url('fonts/SouvenirStd-Medium.otf');
 }
 
-
-
 html{
 	background-color: #F8FFF6;
 }
@@ -135,9 +133,6 @@ footer{
 .stuckMainMobile{
 	margin-top: 110px;
 }
-
-
-
 
 @media (max-width: 720px) {
 	.columns, .column{
