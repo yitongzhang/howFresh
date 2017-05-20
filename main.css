@@ -17,19 +17,24 @@ h4{
 }
 
 .vegItem{
-	margin-bottom: 40px;
+	margin-bottom: 2%;
 	display: flex;
 	flex-direction: row;
 	background-color: #EEFEEF;
 	align-items: center;
 }
 
-.vegItem img{
+.vegItem .imgContainer{
 	margin-left: -8%;
 	margin-top: -8%;
 	order: 1;
 	width: 60%;
-	height: auto;
+	height:18vw;
+	max-height: 260px;
+}
+
+.vegItem .imgContainer img{
+	width: 100%;
 }
 
 .vegItem .vegInfo{
@@ -39,7 +44,7 @@ h4{
 
 header{
 	text-align: center;
-	margin: 50px 0;
+	margin: 50px 0 20px 0;
 }
 
 header .titleArea{
@@ -122,22 +127,45 @@ footer{
 	margin-left: 0;
 }
 .stuck ul{
-	max-width: 80%;
+	width: 80%;
+	max-width: 1200px;
 	margin:0 auto;
 }
 
 .stuckMainDesktop{
-	margin-top: 132px;
+	margin-top: 102px;
 }
 
 .stuckMainMobile{
 	margin-top: 110px;
 }
 
-@media (max-width: 720px) {
-	.columns, .column{
-		width: 90%;
-		margin-left: 5%;
+@media (max-width: 760px) {
+	.titleArea{
+		margin-bottom: 10px !important;
+	}
+ 	button{font-size: 1.7rem;}
+}
+
+@media (max-width: 650px) {
+	.vegItem .imgContainer{
+		margin-left:8%;
+		margin-top: -4%;
+		order: 1;
+		width: auto;
+		height:108%;
+	}
+
+	.vegItem .imgContainer img{
+		height:100%;
+		width: auto;
+	}
+
+	.vegItem {
+		margin-bottom: 20px;
+		width: 86%;
+		margin-left: 7%;
+		height: 100px;
 	}
 	.titleArea{
 		margin-bottom: 0px !important;
@@ -170,5 +198,4 @@ footer{
 		background: -moz-linear-gradient(left, rgba(248, 255, 246, 1) , rgba(248, 255, 246, 0.1)); /* For Firefox 3.6 to 15 */
 		background: linear-gradient(to left, rgba(248, 255, 246, 1) , rgba(248, 255, 246, 0.1)); /* Standard syntax */
 	}
-
 }

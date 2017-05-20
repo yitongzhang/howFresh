@@ -107,7 +107,7 @@ class MonthCheckList extends React.Component{
         <ul>{checkItems}</ul>
       );
     }
-    else if (winWidth>720) {
+    else if (winWidth>650) {
       return (
         <ul>{checkItemsSmall}</ul>
       );
@@ -132,7 +132,11 @@ class MonthCheckList extends React.Component{
 class VegImage extends React.Component {
   render() {
     const fallbackImg = "img/Beets.png"  
-    return <img src={"img/"+this.props.name+".png"} onError={(e)=>{e.target.src=fallbackImg}}/>;
+    return (
+      <div className="imgContainer">
+        <img src={"img/"+this.props.name+".png"} onError={(e)=>{e.target.src=fallbackImg}}/>
+      </div>
+    );
   }
 }
 
@@ -200,7 +204,7 @@ class VeggiesList extends React.Component {
 // Final assembly ============================
 function Header(){
   const winWidth = window.innerWidth;
-  if (winWidth>720) { return(
+  if (winWidth>650) { return(
       <header id="header">  
         <div className="titleArea">
           <h1>How Fresh</h1>

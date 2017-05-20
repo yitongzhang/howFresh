@@ -31,6 +31,19 @@ h5 { font-size: 1.4rem; line-height: 1.5;}
 h6 { font-size: 0.8rem; line-height: 1.6;}
 p { margin-top: 0; }
 
+@media (min-width: 1200px) {
+  h1{font-size: 7.0rem;}
+  h2{font-size: 5.0rem;}
+  h4 { font-size: 2.4rem !important; line-height: 1.5; }
+}
+
+@media (max-width: 720px) and (min-width: 650px){
+  h4{font-size: 1.3rem;}
+  h5{font-size: 0.6rem;}
+ 
+}
+
+
 
 a{color: #027003; text-decoration: none;}
 a:hover{color: #0DDD0F;}
