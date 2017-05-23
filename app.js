@@ -131,7 +131,7 @@ class MonthCheckList extends React.Component{
 // Using: *
 class VegImage extends React.Component {
   render() {
-    const fallbackImg = "img/Beets.png"  
+    const fallbackImg = "img/Dirt.png"  
     return (
       <div className="imgContainer">
         <img src={"img/"+this.props.name+".png"} onError={(e)=>{e.target.src=fallbackImg}}/>
