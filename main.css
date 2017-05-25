@@ -139,8 +139,13 @@ header li:hover{
 }
 
 footer{
-	margin-top: 60px;
+	margin-top: 30px;
 	margin-bottom: 60px;
+}
+
+footer .line{
+	width: 96%;
+	margin-bottom: 30px;
 }
 .footer{
 	text-align: left;

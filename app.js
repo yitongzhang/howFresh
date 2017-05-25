@@ -242,6 +242,7 @@ function Body(){
 function Footer(){
   return(
     <footer className="u-cf">
+      <div className="line"></div>
       <div className="footer about seven columns">
         <h5>About</h5>
         <p>How Fresh was photographed, designed and built by O/M, a food-loving product design studio in San Francisco, CA.</p>
