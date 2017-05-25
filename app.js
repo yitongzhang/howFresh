@@ -11,7 +11,7 @@ var seasons ={
 }
 var seasonColors={
   "Spring":['#027003','#EEFEEF','#F8FFF6'],
-  "Summer":['#F1B005','#FEFDDE','#FFFCF0'],
+  "Summer":['#F18705','#FEFDDE','#FFFCF0'],
   "Fall":['#C84F30','#FDEBDD','#FFF8F2'],
   "Winter":['#2269A1','#F1F9FF','#FAFDFF']
 }
@@ -317,7 +317,7 @@ function stickMobileNav (){
 function stickDesktopNav (){
   var desktopSticky = document.getElementById('desktopMonthFilter');
   var stickyMain = document.getElementById('main');
-  if( document.body.scrollTop+document.documentElement.scrollTop > 215){
+  if( document.body.scrollTop+document.documentElement.scrollTop > 240){
     desktopSticky.className = "stuck";
     stickyMain.className = "stuckMainDesktop u-cf";
   }
@@ -347,19 +347,19 @@ function setSeasonColor(CurrentSeason,seasonColors){
   html.style["color"]=textColor;
   nav.style["background-color"]=bgColor;
 
-  for (let button of monthButton) {
+  for (let button of Array.from(monthButton)) {
     button.style["color"]=textColor;
     button.style["background-color"]=bgColor;
   }
 
-  for (let a of link) {
+  for (let a of Array.from(link)) {
     a.style["color"]=textColor;
   }
 
-  for (let veg of vegItem) {
+  for (let veg of Array.from(vegItem)) {
     veg.style["background-color"]=itemColor;
   }
-  for (let item of line) {
+  for (let item of Array.from(line)) {
     item.style["background-color"]=textColor;
   }
 
