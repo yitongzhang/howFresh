@@ -93,7 +93,7 @@ class MonthCheckList extends React.Component{
       speed: 500,
       centerMode:true,
       slidesToShow: 3,
-      slidesToScroll: 1,
+      slidesToScroll: 3,
       initialSlide: CurrentMonth,
       arrows:false,
       afterChange: function(currentIndex) {
@@ -115,11 +115,11 @@ class MonthCheckList extends React.Component{
     else {
       return(
         <div className="container">
-          <div className="monthMask leftBox"></div>
+
           <Slider {...settings}>
             {checkItemsSmall}
           </Slider>
-          <div className="monthMask rightBox"></div>
+
         </div>
       );
     }
@@ -196,7 +196,7 @@ class VeggiesList extends React.Component {
       <VegItem name={veggieDict[veggie].name} months={veggieDict[veggie].months} selectedMonth={selectedMonths} key={veggieDict[veggie].name} convertDict={monthsConvert}/>
     );
     return (
-      <div>{vegItems}</div>
+      <div className="">{vegItems}</div>
     );
   }
 }
@@ -233,7 +233,7 @@ function Header(){
 
 function Body(){
   return(
-    <main id='main'>
+    <main id='main' className="u-cf">
       <VeggiesList veggies={Object.keys(veggieDict)}/>
     </main>
   );
@@ -241,8 +241,28 @@ function Body(){
 
 function Footer(){
   return(
-    <footer className="twelve columns">
-
+    <footer className="u-cf">
+      <div className="footer about seven columns">
+        <h5>About</h5>
+        <p>How Fresh was photographed, designed and built by O/M, a food-loving product design studio in San Francisco, CA.</p>
+        <p>Vegetable data by CUESA. Actual vegetables by the wonderful grocers and farmers of San Francisco.</p>
+      </div>
+      <div className="footer OM two columns offset-by-one">
+        <h5>O/M</h5>
+        <ul>
+          <li><a href="rob@youngand.co">Email us</a></li>
+          <li><a href="omstudio.co">Website</a></li>
+          <li><a href="">Dribbble</a></li>
+        </ul>
+      </div>
+      <div className="footer CUESA two columns">
+        <h5>CUESA</h5>
+        <ul>
+          <li><a href="rob@youngand.co">Website</a></li>
+          <li><a href="omstudio.co">Seasonality</a></li>
+          <li><a href="">Markets</a></li>
+        </ul>
+      </div>
     </footer>
   )
 }
@@ -286,7 +306,7 @@ function stickMobileNav (){
   var stickyMain = document.getElementById('main');
   if( document.body.scrollTop+document.documentElement.scrollTop > 184){
     mobileSticky.className = "stuck";
-    stickyMain.className = "stuckMainMobile";
+    stickyMain.className = "stuckMainMobile u-cf";
   }
   else{
     mobileSticky.className = "";
@@ -299,7 +319,7 @@ function stickDesktopNav (){
   var stickyMain = document.getElementById('main');
   if( document.body.scrollTop+document.documentElement.scrollTop > 215){
     desktopSticky.className = "stuck";
-    stickyMain.className = "stuckMainDesktop";
+    stickyMain.className = "stuckMainDesktop u-cf";
   }
   else {
     desktopSticky.className = "";
@@ -310,6 +330,8 @@ function stickDesktopNav (){
 function setSeasonColor(CurrentSeason,seasonColors){
   var monthButton = document.getElementsByTagName("button");
   var vegItem = document.getElementsByClassName("vegItem");
+  var link = document.getElementsByTagName("a");
+  var nav = document.getElementsByTagName("nav")[0];
   var html = document.getElementsByTagName("html")[0];
   var line = document.getElementsByClassName("line");
 
@@ -323,11 +345,17 @@ function setSeasonColor(CurrentSeason,seasonColors){
 
   html.style["background-color"]=bgColor;
   html.style["color"]=textColor;
+  nav.style["background-color"]=bgColor;
 
   for (let button of monthButton) {
     button.style["color"]=textColor;
     button.style["background-color"]=bgColor;
   }
+
+  for (let a of link) {
+    a.style["color"]=textColor;
+  }
+
   for (let veg of vegItem) {
     veg.style["background-color"]=itemColor;
   }
