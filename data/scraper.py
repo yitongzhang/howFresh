@@ -15,10 +15,13 @@ class veggie:
 		self.months = months
 		veggie.count += 1
 
-
 # Import veggies we want -----------
-veggieDreamsCsv = "Artichokes,Asparagus,Bitter melon,Broccoli rabe,Brussels sprouts,Burdock,Cactus pads,Cardoons,Celeriac,Celery,Corn,Cucumbers,Dandelion greens,Eggplant,Fava beans,Fava greens,Fiddleheads,Ginger root,Green beans,Green garlic,Horseradish,Jicama,Nettles,Okra,Parsnips,Pea shoots,Peas,Peppers chile,Peppers sweet,Potatoes,Pumpkins,Purslane,Rutabagas,Salsify,Shallots,Shelling beans,Squash summer,Squash winter,Sunchokes,Sweet potatoes,Taro root,Tatsoi,Tomatillos,Tomatoes,Yacon,Zucchini,olives,Arugula,Beets,Bok choy,Broccoli,Cabbage,Carrots,Cauliflower,Chard,Chicory,Collard greens,Cress,Endive,Fennel,Garlic,Herbs,Kale,Kohlrabi,Lambsquarters,Leeks,Lettuce,Mizuna,Mushrooms,Mustard greens,Onions,Orach,Radishes,Scallions,Sorrel,Spinach,Sprouts,Turnips,lemongrass"
+veggieDreamsCsv = "Artichokes,Arugula,Asparagus,Beets,Bitter melon,Bok choy,Broccoli,Broccoli rabe,Brussels sprouts,Burdock,Cabbage,Cactus pads,Cardoons,Carrots,Cauliflower,Celeriac,Celery,Chard,Chicory,Collard greens,Corn,Cress,Cucumbers,Dandelion greens,Eggplant,Endive,Fava beans,Fava greens,Fennel,Fiddleheads,Garlic,Ginger root,Green beans,Green garlic,Herbs,Horseradish,Jicama,Kale,Kohlrabi,Lambsquarters,Leeks,Lemongrass,Lettuce,Mizuna,Mushrooms,Mustard greens,Nettles,Okra,Olives,Onions,Orach,Parsnips,Pea shoots,Peas,Peppers chile,Peppers sweet,Potatoes,Pumpkins,Purslane,Radishes,Rutabagas,Salsify,Scallions,Shallots,Shelling beans,Sorrel,Spinach,Sprouts,Squash summer,Squash winter,Sunchokes,Sweet potatoes,Taro root,Tatsoi,Tomatillos,Tomatoes,Turnips,Yacon,Zucchini"
 veggieDreams = veggieDreamsCsv.split(",")
+
+# check if ordered
+print veggieDreams
+
 
 for i, vegSpace in enumerate(veggieDreams):
 	veggieDreams[i]=vegSpace.replace(" ","-")
@@ -56,14 +59,15 @@ for veg in veggieDreams:
 		print "error, going to next."
 		continue
 
-
+print veggieDict
 # Make dictionary of objects json serializable
 # Replace %20, with -
 serialVegDict ={}
 
-for veg in veggieDict:
+for veg in sorted(veggieDict):
 	serialVegDict[veg] =veggieDict[veg].__dict__
 
+print serialVegDict
 
 # Spit out Data here!
 with open('vegData.json', 'w') as fp:
