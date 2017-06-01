@@ -13,13 +13,18 @@ var seasonColors={
   "Spring":['#027003','#EEFEEF','#F8FFF6'],
   "Summer":['#F18705','#FEFDDE','#FFFCF0'],
   "Fall":['#C84F30','#FDEBDD','#FFF8F2'],
-  "Winter":['#2269A1','#F1F9FF','#FAFDFF']
+  "Winter":['#427CA4','#F1F9FF','#FAFDFF']
 }
 var CurrentMonth = new Date().getMonth()
 var CurrentDate = new Date().getDate()
 var CurrentYear = new Date(). getFullYear()
 var selectedMonths=[]
 selectedMonths.push(CurrentMonth)
+for (var key in seasons) {
+  if (seasons[key].includes(selectedMonths[0])) {
+    CurrentSeason = key;
+  }
+}
 var CurrentSeason;
 
 // Components =================================
@@ -157,9 +162,9 @@ class VegItem extends React.Component {
           <div className="vegItem four columns">
             <VegImage name={this.props.name}/>
 
-              <div className="vegInfo">
+              <div className="vegInfo ">
                 <h4>{this.props.name}</h4>
-                <h5>Available all year</h5>
+                <h5>Always available</h5>
               </div>
 
           </div>
@@ -172,7 +177,7 @@ class VegItem extends React.Component {
 
               <div className="vegInfo">
                 <h4>{this.props.name}</h4>
-                <h5>{vegMonths[0]}–{vegMonths[lastMonth]}</h5>
+                <h5 className="freshNow">{vegMonths[0].substring(0,3)}–{vegMonths[lastMonth].substring(0,3)}</h5>
               </div>
 
           </div>
@@ -189,8 +194,6 @@ class VegItem extends React.Component {
 // Using: VegItem
 class VeggiesList extends React.Component {
   render() {
-    var vegStyle = {
-    }
     const veggies = this.props.veggies;
     const vegItems = veggies.map((veggie) =>
       <VegItem name={veggieDict[veggie].name} months={veggieDict[veggie].months} selectedMonth={selectedMonths} key={veggieDict[veggie].name} convertDict={monthsConvert}/>
@@ -251,17 +254,17 @@ function Footer(){
       <div className="footer OM two columns offset-by-one">
         <h5>O/M</h5>
         <ul>
-          <li><a href="rob@youngand.co">Email us</a></li>
-          <li><a href="omstudio.co">Website</a></li>
-          <li><a href="">Dribbble</a></li>
+          <li><a href="mailto:rob@youngand.co?Subject=Found%20you%20via%20How%20Fresh">Email us</a></li>
+          <li><a href="http://omstudio.co/">Website</a></li>
+          <li><a href="https://dribbble.com/omstudio">Dribbble</a></li>
         </ul>
       </div>
       <div className="footer CUESA two columns">
         <h5>CUESA</h5>
         <ul>
-          <li><a href="rob@youngand.co">Website</a></li>
-          <li><a href="omstudio.co">Seasonality</a></li>
-          <li><a href="">Markets</a></li>
+          <li><a href="http://www.cuesa.org/">Website</a></li>
+          <li><a href="http://www.cuesa.org/eat-seasonally/charts">Seasonality</a></li>
+          <li><a href="http://www.cuesa.org/markets">Markets</a></li>
         </ul>
       </div>
     </footer>
@@ -329,12 +332,15 @@ function stickDesktopNav (){
 }
 
 function setSeasonColor(CurrentSeason,seasonColors){
+  console.log(CurrentSeason)
+  console.log(seasonColors)
   var monthButton = document.getElementsByTagName("button");
   var vegItem = document.getElementsByClassName("vegItem");
   var link = document.getElementsByTagName("a");
   var nav = document.getElementsByTagName("nav")[0];
   var html = document.getElementsByTagName("html")[0];
   var line = document.getElementsByClassName("line");
+  var freshNow = document.getElementsByClassName("freshNow");
 
   var textColor = seasonColors[CurrentSeason][0];
   var itemColor = seasonColors[CurrentSeason][1];
@@ -347,6 +353,11 @@ function setSeasonColor(CurrentSeason,seasonColors){
   html.style["background-color"]=bgColor;
   html.style["color"]=textColor;
   nav.style["background-color"]=bgColor;
+
+  for (let border of Array.from(freshNow)) {
+    border.style["border-color"]=textColor;
+  }
+
 
   for (let button of Array.from(monthButton)) {
     button.style["color"]=textColor;
@@ -371,6 +382,8 @@ ReactDOM.render( <App/> , document.getElementById('root'));
 window.onresize = function(event) {
   setTimeout(function(){ ReactDOM.render( <App/> , document.getElementById('root')); }, 300);
 };
+
+setSeasonColor(CurrentSeason,seasonColors);
 
 // Fixed navbar ==========================
 window.onscroll = function() {

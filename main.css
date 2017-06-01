@@ -7,10 +7,6 @@
 	src: url('fonts/SouvenirStd-Medium.otf');
 }
 
-html{
-	background-color: #F8FFF6;
-}
-
 h4{
 	line-height: 1;
 	margin-bottom: 0;
@@ -20,7 +16,6 @@ h4{
 	margin-bottom: 2%;
 	display: flex;
 	flex-direction: row;
-	background-color: #EEFEEF;
 	align-items: center;
 }
 
@@ -36,7 +31,13 @@ h4{
 .vegItem .imgContainer img{
 	width: 100%;
 	z-index: 1000;
-	/*background-color: red;*/
+}
+	
+.freshNow{
+	border:1px solid;
+	padding: 1px 4px;
+	border-radius: 4px;
+	display: inline;
 }
 
 .vegItem .vegInfo{
@@ -44,9 +45,19 @@ h4{
 	padding-left: 40px;
 }
 
+.vegInfo h4{
+	margin-bottom: 2px;
+}
+
 header{
 	text-align: center;
-	margin: 50px 0 20px 0;
+	margin: 50px 0 50px 0;
+}
+header .line{
+	height: 2px
+}
+header h5{
+	font-weight: 500;
 }
 
 header .titleArea{
@@ -66,8 +77,7 @@ header .titleArea{
 
 .line{
 	width: 50px;
-	height: 2px;
-	background-color: #027003;
+	height: 1px;
 	display: inline-block;
 	margin: 0px 10px;
 }
@@ -88,8 +98,6 @@ button{
 	font-size: 2.1rem; 
 	line-height: 1.35; 
 	font-family: "Souvenir-medium";
-	color: #027003;
-	background-color: #F8FFF6;
 	outline: none;
 	border:0px;
 	opacity: 0.3;
@@ -115,27 +123,28 @@ header li:hover{
 	padding: 0 0px;
 }
 
+
 .stuck{
 	position: fixed;
 	top:0;
 	left: 0;
-	background-color: #F8FFF6;
 	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
 	width: 100vw;
 	margin-left: 0;
 }
 .stuck ul{
+	padding:8px 0 4px 0;
 	width: 80%;
 	max-width: 1200px;
 	margin:0 auto;
 }
 
 .stuckMainDesktop{
-	margin-top: 102px;
+	margin-top: 134px;
 }
 
 .stuckMainMobile{
-	margin-top: 90px;
+	margin-top: 114px;
 }
 
 footer{
@@ -144,12 +153,13 @@ footer{
 }
 
 footer .line{
-	width: 96%;
+	width: 98%;
 	margin-bottom: 30px;
 }
 .footer{
 	text-align: left;
 }
+
 .footer h5{
 	font-size: 2.2rem;
 	font-size: 700;
@@ -159,6 +169,7 @@ footer .line{
 
 .footer p, .footer a{
 	font-size: 1.8rem;
+	font-weight: 300;
 }
 .footer p{
 	margin-bottom: 16px;
@@ -173,9 +184,19 @@ footer .line{
 }
 
 @media (max-width: 650px) {
+	footer .line{
+		margin-left: 0;
+		width: 100%;
+	}
 	footer{
 		margin-left: 7%;
 		width: 86%;
+	}
+	.footer p, .footer a{
+		font-size: 1.4rem;
+	}
+	.footer h5{
+		margin-bottom: 0;
 	}
 	.about{
 		margin-bottom: 20px;
@@ -184,10 +205,11 @@ footer .line{
 		width: 43%;
 	}
 	.CUESA{
+		margin-left: 14%;
 		width: 43%;
 	}
 	.vegItem .imgContainer{
-		margin-left:8%;
+		margin-left:2%;
 		margin-top: -4%;
 		order: 1;
 		width: auto;
@@ -203,7 +225,10 @@ footer .line{
 		margin-bottom: 20px;
 		width: 86%;
 		margin-left: 7%;
-		height: 100px;
+		height: 120px;
+	}
+	.vegItem .vegInfo{
+		padding-left:50px;
 	}
 	.titleArea{
 		margin-bottom: 0px !important;
